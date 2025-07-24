@@ -1,38 +1,140 @@
-.App {
-  text-align: center;
+/* App.css */
+
+/* 1. Import Professional Fonts from Google Fonts */
+/* Using Inter for body text and Plus Jakarta Sans for headings for a modern, clean look */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* Global styles for smooth font rendering and base font application */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Apply Inter as the primary font for the entire body */
+  font-family: 'Inter', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Apply Plus Jakarta Sans specifically to headings for visual hierarchy */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 2. Custom Scrollbar for a nicer look */
+/* Light mode scrollbar */
+body::-webkit-scrollbar {
+  width: 10px;
+  /* Width of the scrollbar */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Light gray track */
+  border-radius: 10px;
+  /* Rounded corners for the track */
 }
 
-.App-link {
-  color: #61dafb;
+body::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Darker gray thumb */
+  border-radius: 10px;
+  /* Rounded corners for the thumb */
+  border: 2px solid #f1f1f1;
+  /* Border to create a gap from the track */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Even darker gray on hover */
 }
+
+/* Dark mode scrollbar */
+.dark body::-webkit-scrollbar-track {
+  background: #2d3748;
+  /* Tailwind's gray-800 for track */
+}
+
+.dark body::-webkit-scrollbar-thumb {
+  background: #a0aec0;
+  /* Tailwind's gray-400 for thumb */
+  border: 2px solid #2d3748;
+  /* Border to match dark track */
+}
+
+.dark body::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e0;
+  /* Tailwind's gray-300 on hover */
+}
+
+/* 3. Styles for react-vertical-timeline-component */
+
+/* Light mode defaults for content background, text, and shadow */
+.vertical-timeline-element-content {
+  background: #f3f4f6;
+  /* Tailwind's gray-100 */
+  color: #1f2937;
+  /* Tailwind's gray-800 */
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+  /* Light shadow */
+  border-radius: 8px;
+  /* Consistent border-radius */
+}
+
+/* Light mode arrow */
+.vertical-timeline-element-content-arrow {
+  border-right: 7px solid #f3f4f6;
+  /* Match light mode content background */
+}
+
+/* Light mode date text */
+.vertical-timeline-element-date {
+  color: #4b5563;
+  /* Tailwind's gray-600 */
+}
+
+/* Dark mode overrides for timeline content */
+.dark .vertical-timeline-element-content {
+  background: #1f2937 !important;
+  /* Tailwind's gray-800 for dark mode */
+  color: #f9fafb !important;
+  /* Tailwind's gray-50 for dark mode */
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4) !important;
+  /* Darker shadow for dark mode */
+}
+
+/* Dark mode arrow */
+.dark .vertical-timeline-element-content-arrow {
+  border-right: 7px solid #1f2937 !important;
+  /* Match dark mode content background */
+}
+
+/* Dark mode date text */
+.dark .vertical-timeline-element-date {
+  color: #d1d5db !important;
+  /* Tailwind's gray-300 for dark mode */
+}
+
+/* Optional: Adjust icon shadow for dark mode if it looks off */
+.vertical-timeline-element-icon {
+  box-shadow: 0 0 0 4px #a0aec0, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 rgba(0, 0, 0, 0.08) !important;
+}
+
+.dark .vertical-timeline-element-icon {
+  box-shadow: 0 0 0 4px #4b5563, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 rgba(0, 0, 0, 0.08) !important;
+  /* Darker border/shadow for the icon in dark mode */
+}
+
+/* 4. Additional Utility Classes (if you want to add custom animations or complex styles not easily done with Tailwind) */
+/* Example: A subtle background pattern */
+/*
+body.dark {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+body {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+*/
