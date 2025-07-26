@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaDownload, FaMoon, FaSun, FaExternalLinkAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaDownload, FaMoon, FaSun, FaExternalLinkAlt, FaBars, FaTimes } from 'react-icons/fa'; // Added FaBars and FaTimes
+import { motion, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import './App.css'; // Your custom CSS file
 
-// Data for the sections
+// Data for the sections (unchanged)
 const skills = [
   { name: 'Git', icon: 'https://img.icons8.com/?size=100&id=20906&format=png&color=000000' },
   { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
@@ -46,14 +46,14 @@ const certifications = [
   {
     title: 'Learning Full Stack Development',
     issuer: 'Infosys | Springboard',
-    dateIssued: 'June 30, 2025', // Completion date from certificate
-    link: '/certificates/Learning-Full-stack-Development-certificate.pdf' // Path to your PDF in the public folder
+    dateIssued: 'June 30, 2025',
+    link: '/certificates/Learning-Full-stack-Development-certificate.pdf'
   },
   {
     title: 'Full Stack AWS Application Development',
     issuer: 'Infosys | Springboard',
-    dateIssued: 'July 7, 2025', // Completion date from certificate
-    link: '/certificates/Full-stack-aws-application-development.pdf' // Path to your PDF in the public folder
+    dateIssued: 'July 7, 2025',
+    link: '/certificates/Full-stack-aws-application-development.pdf'
   }
 ];
 
@@ -109,6 +109,7 @@ const staggerContainer = {
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [activeCert, setActiveCert] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -123,12 +124,19 @@ export default function App() {
     setActiveCert(activeCert === certLink ? null : certLink);
   };
 
+  // Function to close mobile menu when a navigation link is clicked
+  const handleNavLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="bg-white text-gray-800 dark:bg-gray-950 dark:text-gray-100 min-h-screen font-sans transition-all duration-300">
       {/* Navbar - Fixed and responsive */}
       <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-xl font-bold tracking-widest text-cyan-500 dark:text-cyan-400">USHAKOYALA AJAY KUMAR</h1>
+
+          {/* Desktop Navigation Links (hidden on mobile) */}
           <div className="hidden md:flex space-x-6 items-center">
             <a href="#about" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition">About</a>
             <a href="#skills" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition">Skills</a>
@@ -136,20 +144,57 @@ export default function App() {
             <a href="#timeline" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition">Journey</a>
             <a href="#certifications" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition">Certifications</a>
             <a href="#contact" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition">Contact</a>
-            {/* UPDATED: Resume link to open in new tab instead of download */}
+            {/* Resume link to open in new tab */}
             <a href="/certificates/resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition flex items-center gap-1">
-                <FaExternalLinkAlt /> Resume
+              <FaExternalLinkAlt /> Resume
             </a>
+            {/* Dark Mode Toggle for desktop */}
             <button onClick={() => setDarkMode(!darkMode)} className="text-lg focus:outline-none hover:text-cyan-500 dark:hover:text-cyan-400 transition">
               {darkMode ? <FaSun /> : <FaMoon />}
             </button>
           </div>
-          <div className="md:hidden">
-             <button onClick={() => setDarkMode(!darkMode)} className="text-lg focus:outline-none hover:text-cyan-500 dark:hover:text-cyan-400 transition">
+
+          {/* Mobile Menu Icon and Dark Mode Toggle (visible on mobile) */}
+          <div className="md:hidden flex items-center space-x-4">
+            {/* Dark Mode Toggle for mobile */}
+            <button onClick={() => setDarkMode(!darkMode)} className="text-lg focus:outline-none hover:text-cyan-500 dark:hover:text-cyan-400 transition">
               {darkMode ? <FaSun /> : <FaMoon />}
+            </button>
+            {/* Hamburger/Close Icon for mobile menu */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-lg focus:outline-none text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu (Conditionally rendered with animation) */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="md:hidden bg-white dark:bg-gray-900 shadow-lg pb-4"
+            >
+              <div className="flex flex-col items-center space-y-4 pt-4">
+                <a href="#about" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">About</a>
+                <a href="#skills" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">Skills</a>
+                <a href="#projects" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">Projects</a>
+                <a href="#timeline" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">Journey</a>
+                <a href="#certifications" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">Certifications</a>
+                <a href="#contact" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition">Contact</a>
+                <a href="/certificates/resume.pdf" target="_blank" rel="noopener noreferrer" onClick={handleNavLinkClick} className="block w-full text-center py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-100 hover:text-cyan-500 dark:hover:text-cyan-400 transition flex items-center justify-center gap-1">
+                  <FaExternalLinkAlt /> Resume
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
