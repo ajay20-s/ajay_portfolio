@@ -391,7 +391,7 @@ export default function App() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
-            action="https://formspree.io/f/YOUR_FORMSPREE_HASH" // <<<<<< IMPORTANT: Replace with your Formspree endpoint
+            action="https://formspree.io/f/xqalbjdg" // <<<<<< IMPORTANT: Replace with your Formspree endpoint
             method="POST"
             className="space-y-6 text-left p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-10"
           >
@@ -441,7 +441,7 @@ export default function App() {
             <motion.a variants={itemVariants} whileHover={{ scale: 1.2 }} href="mailto:ushakoilaajay10@gmail.com" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300" aria-label="Email me"><FaEnvelope /></motion.a>
             <motion.a variants={itemVariants} whileHover={{ scale: 1.2 }} href="tel:9704742380" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300" aria-label="Call me"><FaPhone /></motion.a>
             <motion.a variants={itemVariants} whileHover={{ scale: 1.2 }} href="https://github.com/ajay20-s" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300" aria-label="Visit my GitHub"><FaGithub /></motion.a>
-            <motion.a variants={itemVariants} whileHover={{ scale: 1.2 }} href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300" aria-label="Visit my LinkedIn"><FaLinkedin /></motion.a>
+            <motion.a variants={itemVariants} whileHover={{ scale: 1.2 }} href="https://www.linkedin.com/in/ushakoyala-ajay-kumar-03b204300/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300" aria-label="Visit my LinkedIn"><FaLinkedin /></motion.a>
           </motion.div>
         </div>
       </motion.section>
